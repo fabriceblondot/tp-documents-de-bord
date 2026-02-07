@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>TP – Le permis à points</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#f4f6f8;
+  margin:20px;
+}
+h1,h2,h3{color:#1f4e79}
+.card{
+  background:#fff;
+  border:1px solid #ccc;
+  border-radius:10px;
+  padding:15px;
+  margin-bottom:20px;
+}
+.notice{
+  background:#eef5ff;
+  border-left:6px solid #1f4e79;
+  padding:10px;
+  margin-bottom:10px;
+}
+img{
+  max-width:100%;
+  border:1px solid #ccc;
+  border-radius:8px;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+th,td{
+  border:1px solid #ccc;
+  padding:8px;
+  vertical-align:top;
+}
+th{background:#eef3f8}
+select,input,textarea{
+  width:100%;
+  padding:6px;
+}
+textarea{min-height:70px}
+button{
+  margin-top:10px;
+  padding:8px 14px;
+  font-weight:bold;
+}
+.ok{background:#c8e6c9}
+.bad{background:#ffcdd2}
+.score{font-weight:bold;margin-top:10px}
+</style>
+</head>
+
+<body>
+
+<h1>Travail Pratique – Le permis à points</h1>
+<p><strong>Durée :</strong> environ 1 heure</p>
+
+<!-- INTRO -->
+<div class="card">
+<div class="notice">
+<strong>Objectifs du travail :</strong>
+<ul>
+<li>Comprendre le fonctionnement du permis à points</li>
+<li>Savoir estimer un retrait de points</li>
+<li>Calculer un solde de points</li>
+<li>Identifier les situations de perte du permis</li>
+</ul>
+</div>
+
+<img src="https://raw.githubusercontent.com/fabriceblondot/images-permis/main/permis-a-points.jpeg">
+<br><br>
+<img src="https://raw.githubusercontent.com/fabriceblondot/images-permis/main/solde%20de%20point.jpg">
+</div>
+
+<!-- ACTIVITÉ 1 -->
+<div class="card" id="act1">
+<h2>Activité 1 – Comprendre le permis à points</h2>
+<p><strong>Consigne :</strong> À l’aide du site officiel, réponds aux questions ci-dessous.</p>
+
+<div class="notice">
+<a href="https://www.securite-routiere.gouv.fr/le-permis-points/presentation-du-permis-points"
+target="_blank">
+Ressource officielle – Présentation du permis à points
+</a>
+</div>
+
+<table>
+<tr><td>Capital initial d’un jeune conducteur</td><td><select id="a1q1"><option></option><option>6</option><option>12</option></select></td></tr>
+<tr><td>Capital maximal d’un conducteur confirmé</td><td><select id="a1q2"><option></option><option>6</option><option>12</option></select></td></tr>
+<tr><td>À combien de points le permis est-il invalidé ?</td><td><select id="a1q3"><option></option><option>0</option><option>3</option><option>6</option></select></td></tr>
+<tr><td>Un stage permet-il de récupérer des points ?</td><td><select id="a1q4"><option></option><option>oui</option><option>non</option></select></td></tr>
+</table>
+
+<button onclick="checkAct1()">Vérifier activité 1</button>
+<div id="s1" class="score"></div>
+</div>
+
+<!-- ACTIVITÉ 2 -->
+<div class="card" id="act2">
+<h2>Activité 2 – Exemples de retraits de points</h2>
+<p><strong>Consigne :</strong> Associe chaque situation au retrait de points le plus probable.</p>
+
+<table>
+<tr><th>Situation</th><th>Points</th></tr>
+<tr><td>Excès de vitesse +15 km/h</td><td><select id="a2_1"><option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>6</option></select></td></tr>
+<tr><td>Excès de vitesse +25 km/h</td><td><select id="a2_2"><option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>6</option></select></td></tr>
+<tr><td>Téléphone au volant</td><td><select id="a2_3"><option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>6</option></select></td></tr>
+<tr><td>Ligne continue franchie</td><td><select id="a2_4"><option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>6</option></select></td></tr>
+<tr><td>Non-port de la ceinture</td><td><select id="a2_5"><option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>6</option></select></td></tr>
+<tr><td>Non-respect distances de sécurité</td><td><select id="a2_6"><option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>6</option></select></td></tr>
+<tr><td>Excès de vitesse +35 km/h</td><td><select id="a2_7"><option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>6</option></select></td></tr>
+<tr><td>Excès de vitesse +45 km/h</td><td><select id="a2_8"><option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>6</option></select></td></tr>
+<tr><td>Stop / priorité non respecté</td><td><select id="a2_9"><option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>6</option></select></td></tr>
+<tr><td>Sens interdit</td><td><select id="a2_10"><option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>6</option></select></td></tr>
+<tr><td>Excès de vitesse +55 km/h</td><td><select id="a2_11"><option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>6</option></select></td></tr>
+<tr><td>Conduite sous stupéfiants</td><td><select id="a2_12"><option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>6</option></select></td></tr>
+</table>
+
+<button onclick="checkAct2()">Vérifier activité 2</button>
+<div id="s2" class="score"></div>
+</div>
+
+<!-- ACTIVITÉ 3 -->
+<div class="card" id="act3">
+<h2>Activité 3 – Cas concrets</h2>
+<p><strong>Consigne :</strong> Calcule le solde de points et indique l’issue.</p>
+
+<table>
+<tr><th>Cas</th><th>Situation</th><th>Solde après</th><th>Issue</th></tr>
+
+<tr><td>1</td><td>Jeune conducteur (6 pts) perd 3 points</td><td><input id="c1_solde"></td><td><select id="c1_issue"><option></option><option value="reste">Permis conservé</option><option value="perte">Perte du permis</option></select></td></tr>
+<tr><td>2</td><td>Conducteur (12 pts) perd 1 puis 3 points</td><td><input id="c2_solde"></td><td><select id="c2_issue"><option></option><option value="reste">Permis conservé</option><option value="perte">Perte du permis</option></select></td></tr>
+<tr><td>3</td><td>Jeune conducteur (6 pts) perd 6 points</td><td><input id="c3_solde"></td><td><select id="c3_issue"><option></option><option value="perte">Perte du permis</option><option value="reste">Permis conservé</option></select></td></tr>
+<tr><td>4</td><td>Jeune conducteur perd 2 puis 2 points</td><td><input id="c4_solde"></td><td><select id="c4_issue"><option></option><option value="reste">Permis conservé</option><option value="perte">Perte du permis</option></select></td></tr>
+<tr><td>5</td><td>Conducteur perd 4 puis 4 points</td><td><input id="c5_solde"></td><td><select id="c5_issue"><option></option><option value="reste">Permis conservé</option><option value="perte">Perte du permis</option></select></td></tr>
+<tr><td>6</td><td>Conducteur perd 6 puis 6 points</td><td><input id="c6_solde"></td><td><select id="c6_issue"><option></option><option value="perte">Perte du permis</option><option value="reste">Permis conservé</option></select></td></tr>
+</table>
+
+<button onclick="checkAct3()">Vérifier activité 3</button>
+<div id="s3" class="score"></div>
+</div>
+
+<!-- ACTIVITÉ 4 -->
+<div class="card" id="act4">
+<h2>Activité 4 – Vrai / Faux</h2>
+<p><strong>Consigne :</strong> Indique si l’affirmation est vraie ou fausse.</p>
+
+<table>
+<tr><td>Le permis à points commence toujours à 12 points</td><td><select id="v1"><option></option><option>Vrai</option><option>Faux</option></select></td></tr>
+<tr><td>Un stage permet toujours d’éviter la perte du permis</td><td><select id="v2"><option></option><option>Vrai</option><option>Faux</option></select></td></tr>
+<tr><td>Les points peuvent se récupérer avec le temps</td><td><select id="v3"><option></option><option>Vrai</option><option>Faux</option></select></td></tr>
+<tr><td>On peut perdre l’intégralité de ses points</td><td><select id="v4"><option></option><option>Vrai</option><option>Faux</option></select></td></tr>
+</table>
+
+<button onclick="checkAct4()">Vérifier activité 4</button>
+<div id="s4" class="score"></div>
+</div>
+
+<!-- BILAN -->
+<div class="card">
+<h2>Bilan</h2>
+<p>En quelques phrases, explique :</p>
+<ul>
+<li>Pourquoi le permis à points existe</li>
+<li>Ce que tu ferais pour éviter de perdre ton permis</li>
+</ul>
+<textarea placeholder="Réponse personnelle"></textarea>
+</div>
+
+<script>
+function mark(e,o){e.className=o?"ok":"bad";}
+
+function checkAct1(){
+let ok=0;
+if(a1q1.value=="6"){mark(a1q1,1);ok++;}else mark(a1q1,0);
+if(a1q2.value=="12"){mark(a1q2,1);ok++;}else mark(a1q2,0);
+if(a1q3.value=="0"){mark(a1q3,1);ok++;}else mark(a1q3,0);
+if(a1q4.value=="oui"){mark(a1q4,1);ok++;}else mark(a1q4,0);
+s1.innerText="Score activité 1 : "+ok+"/4";
+}
+
+const act2={a2_1:"1",a2_2:"2",a2_3:"2",a2_4:"3",a2_5:"3",a2_6:"3",a2_7:"3",a2_8:"4",a2_9:"4",a2_10:"4",a2_11:"6",a2_12:"6"};
+function checkAct2(){
+let ok=0;
+for(let k in act2){
+let e=document.getElementById(k);
+if(e.value==act2[k]){mark(e,1);ok++;}else mark(e,0);
+}
+s2.innerText="Score activité 2 : "+ok+"/12";
+}
+
+function checkAct3(){
+let ok=0;
+if(c1_solde.value=="3"&&c1_issue.value=="reste"){ok++;mark(c1_solde,1);mark(c1_issue,1);}else{mark(c1_solde,0);mark(c1_issue,0);}
+if(c2_solde.value=="8"&&c2_issue.value=="reste"){ok++;mark(c2_solde,1);mark(c2_issue,1);}else{mark(c2_solde,0);mark(c2_issue,0);}
+if(c3_solde.value=="0"&&c3_issue.value=="perte"){ok++;mark(c3_solde,1);mark(c3_issue,1);}else{mark(c3_solde,0);mark(c3_issue,0);}
+if(c4_solde.value=="2"&&c4_issue.value=="reste"){ok++;mark(c4_solde,1);mark(c4_issue,1);}else{mark(c4_solde,0);mark(c4_issue,0);}
+if(c5_solde.value=="4"&&c5_issue.value=="reste"){ok++;mark(c5_solde,1);mark(c5_issue,1);}else{mark(c5_solde,0);mark(c5_issue,0);}
+if(c6_solde.value=="0"&&c6_issue.value=="perte"){ok++;mark(c6_solde,1);mark(c6_issue,1);}else{mark(c6_solde,0);mark(c6_issue,0);}
+s3.innerText="Score activité 3 : "+ok+"/6";
+}
+
+function checkAct4(){
+let ok=0;
+if(v1.value=="Faux"){mark(v1,1);ok++;}else mark(v1,0);
+if(v2.value=="Faux"){mark(v2,1);ok++;}else mark(v2,0);
+if(v3.value=="Vrai"){mark(v3,1);ok++;}else mark(v3,0);
+if(v4.value=="Vrai"){mark(v4,1);ok++;}else mark(v4,0);
+s4.innerText="Score activité 4 : "+ok+"/4";
+}
+</script>
+
+</body>
+</html>

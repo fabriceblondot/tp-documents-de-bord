@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>TP – Catégories du permis de conduire</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  margin: 20px;
+}
+
+h1, h2 {
+  color: #1f4e79;
+}
+
+.intro {
+  background: #ffffff;
+  padding: 15px;
+  border-left: 6px solid #1f4e79;
+  margin-bottom: 20px;
+}
+
+.image-box {
+  text-align: center;
+  margin: 20px 0;
+}
+
+img {
+  max-width: 600px;
+  border: 2px solid #ccc;
+}
+
+.container {
+  display: flex;
+  gap: 30px;
+}
+
+#items, #targets {
+  background: #fff;
+  border: 2px dashed #777;
+  padding: 15px;
+  width: 50%;
+  min-height: 700px;
+}
+
+.draggable {
+  background: #e3ecff;
+  padding: 8px;
+  margin: 6px 0;
+  border: 1px solid #444;
+  cursor: grab;
+}
+
+.target {
+  border: 1px solid #333;
+  padding: 8px;
+  margin-bottom: 10px;
+  min-height: 50px;
+  background: #fafafa;
+}
+
+.correct {
+  background-color: #c8e6c9;
+}
+
+.wrong {
+  background-color: #ffcdd2;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 15px;
+  font-size: 16px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Travail Pratique – Catégories du permis de conduire</h1>
+
+<div class="intro">
+  <p><strong>Objectif :</strong> Identifier la catégorie de permis nécessaire selon le véhicule.</p>
+  <p><strong>Durée estimée :</strong> 1 heure</p>
+  <p>
+    <strong>Ressource obligatoire :</strong>
+    <a href="https://permisdeconduire.ants.gouv.fr/tout-savoir-sur-le-permis/les-categories-du-permis-de-conduire"
+       target="_blank">
+       Site officiel ANTS
+    </a>
+  </p>
+  <p>⚠️ Certains exemples sont volontairement <strong>piégeux</strong>.  
+  Une justification peut être demandée à l’oral.</p>
+</div>
+
+<!-- IMAGE VIA GITHUB RAW (déjà intégrée) -->
+<div class="image-box">
+  <img src="https://raw.githubusercontent.com/fabriceblondot/images-permis/main/exemple%20permis%20lourds.jpg"
+       alt="Exemple de permis de conduire français">
+</div>
+
+<hr>
+
+<h2>1) Liste des catégories de permis</h2>
+<ul>
+  <li>AM</li><li>A1</li><li>A2</li><li>A</li>
+  <li>B</li><li>BE</li>
+  <li>C1</li><li>C</li><li>CE</li>
+  <li>D1</li><li>D</li><li>DE</li>
+</ul>
+
+<hr>
+
+<h2>2) Classement des véhicules (glisser-déposer)</h2>
+
+<div class="container">
+
+<div id="items">
+<h3>Véhicules à classer</h3>
+
+<div class="draggable" draggable="true" data-answer="AM">Scooter 50 cm³</div>
+<div class="draggable" draggable="true" data-answer="AM">Quadricycle léger 2 places</div>
+
+<div class="draggable" draggable="true" data-answer="A1">Moto 125 cm³ – 11 kW</div>
+<div class="draggable" draggable="true" data-answer="A1">Moto 124 cm³ – 10 kW</div>
+
+<div class="draggable" draggable="true" data-answer="A2">Moto 35 kW bridée</div>
+<div class="draggable" draggable="true" data-answer="A2">Moto 500 cm³ – 35 kW</div>
+
+<div class="draggable" draggable="true" data-answer="A">Moto 1000 cm³ non bridée</div>
+<div class="draggable" draggable="true" data-answer="A">Moto sportive</div>
+
+<div class="draggable" draggable="true" data-answer="B">Voiture PTAC 3,2 t</div>
+<div class="draggable" draggable="true" data-answer="B">Camionnette PTAC 3,4 t</div>
+
+<div class="draggable" draggable="true" data-answer="BE">Voiture + remorque 2 t</div>
+<div class="draggable" draggable="true" data-answer="BE">4x4 + remorque van</div>
+
+<div class="draggable" draggable="true" data-answer="C1">Camion 5,5 t</div>
+<div class="draggable" draggable="true" data-answer="C1">Camping-car 7 t</div>
+
+<div class="draggable" draggable="true" data-answer="C">Camion 19 t</div>
+<div class="draggable" draggable="true" data-answer="C">Porteur 26 t</div>
+
+<div class="draggable" draggable="true" data-answer="CE">Semi-remorque 40 t</div>
+<div class="draggable" draggable="true" data-answer="CE">Porteur + remorque</div>
+
+<div class="draggable" draggable="true" data-answer="D1">Minibus 16 places</div>
+<div class="draggable" draggable="true" data-answer="D1">Minicar 8 m</div>
+
+<div class="draggable" draggable="true" data-answer="D">Autocar 55 places</div>
+<div class="draggable" draggable="true" data-answer="D">Bus urbain</div>
+
+<div class="draggable" draggable="true" data-answer="DE">Autocar + remorque bagages</div>
+<div class="draggable" draggable="true" data-answer="DE">Bus + remorque technique</div>
+
+</div>
+
+<div id="targets">
+<h3>Catégories de permis</h3>
+<div class="target" data-permis="AM">AM</div>
+<div class="target" data-permis="A1">A1</div>
+<div class="target" data-permis="A2">A2</div>
+<div class="target" data-permis="A">A</div>
+<div class="target" data-permis="B">B</div>
+<div class="target" data-permis="BE">BE</div>
+<div class="target" data-permis="C1">C1</div>
+<div class="target" data-permis="C">C</div>
+<div class="target" data-permis="CE">CE</div>
+<div class="target" data-permis="D1">D1</div>
+<div class="target" data-permis="D">D</div>
+<div class="target" data-permis="DE">DE</div>
+</div>
+
+</div>
+
+<button onclick="corriger()">Vérifier mes réponses</button>
+<p id="score"></p>
+
+<script>
+document.querySelectorAll('.draggable').forEach(item => {
+  item.addEventListener('dragstart', () => item.classList.add('dragging'));
+  item.addEventListener('dragend', () => item.classList.remove('dragging'));
+});
+
+document.querySelectorAll('.target').forEach(zone => {
+  zone.addEventListener('dragover', e => {
+    e.preventDefault();
+    const dragged = document.querySelector('.dragging');
+    if (dragged) zone.appendChild(dragged);
+  });
+});
+
+function corriger() {
+  let score = 0;
+  let total = document.querySelectorAll('.draggable').length;
+
+  document.querySelectorAll('.target').forEach(zone => {
+    const permis = zone.dataset.permis;
+    zone.querySelectorAll('.draggable').forEach(item => {
+      item.classList.remove('correct','wrong');
+      if (item.dataset.answer === permis) {
+        item.classList.add('correct');
+        score++;
+      } else {
+        item.classList.add('wrong');
+      }
+    });
+  });
+
+  document.getElementById('score').innerText =
+    `Résultat : ${score} / ${total}`;
+}
+</script>
+
+</body>
+</html>

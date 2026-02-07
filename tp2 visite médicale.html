@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>TP – Visites médicales (Permis poids lourds)</title>
+
+<style>
+  :root{
+    --bg:#f4f6f8;
+    --card:#ffffff;
+    --text:#0f172a;
+    --muted:#475569;
+    --line:rgba(2,6,23,.18);
+    --accent:#1f4e79;
+    --ok:#c8e6c9;
+    --bad:#ffcdd2;
+    --soft:#e3ecff;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+  }
+  header{
+    padding:22px 18px;
+    background:linear-gradient(90deg, rgba(31,78,121,.12), rgba(31,78,121,.02));
+    border-bottom:1px solid var(--line);
+  }
+  header h1{margin:0 0 6px 0; color:var(--accent)}
+  header p{margin:0; color:var(--muted)}
+  main{max-width:1100px; margin:18px auto; padding:0 18px 30px}
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:16px;
+    margin:14px 0;
+    box-shadow:0 2px 10px rgba(2,6,23,.05);
+  }
+  .row{display:flex; gap:14px; flex-wrap:wrap}
+  .col{flex:1; min-width:280px}
+  .tag{
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:999px;
+    background:rgba(31,78,121,.10);
+    color:var(--accent);
+    font-weight:700;
+    font-size:13px;
+  }
+  a{color:var(--accent)}
+  .images{
+    display:flex; gap:14px; flex-wrap:wrap; justify-content:center; align-items:flex-start;
+    margin-top:10px;
+  }
+  .images figure{
+    margin:0;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:10px;
+    max-width:520px;
+  }
+  .images img{
+    width:100%;
+    height:auto;
+    border-radius:10px;
+    border:1px solid rgba(2,6,23,.10);
+    display:block;
+  }
+  .images figcaption{
+    margin-top:8px;
+    color:var(--muted);
+    font-size:13px;
+  }
+  h2{margin:0 0 10px 0; color:var(--accent)}
+  h3{margin:12px 0 8px}
+  .muted{color:var(--muted)}
+  .notice{
+    border-left:6px solid var(--accent);
+    padding:10px 12px;
+    background:rgba(31,78,121,.06);
+    border-radius:10px;
+  }
+
+  /* Inputs */
+  input[type="text"], select, textarea{
+    width:100%;
+    padding:10px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    outline:none;
+    font-size:15px;
+    background:#fff;
+  }
+  textarea{min-height:90px; resize:vertical}
+  .grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:10px;
+  }
+  @media (max-width: 700px){
+    .grid{grid-template-columns: 1fr;}
+  }
+
+  /* Feedback */
+  .ok{background:var(--ok) !important;}
+  .bad{background:var(--bad) !important;}
+  .score{
+    font-weight:800;
+    margin-top:10px;
+  }
+
+  /* Tables */
+  table{width:100%; border-collapse:collapse; margin-top:10px}
+  th, td{border:1px solid var(--line); padding:10px; text-align:left; vertical-align:top}
+  th{background:rgba(31,78,121,.06)}
+  .btns{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+  button{
+    padding:10px 14px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:#fff;
+    cursor:pointer;
+    font-weight:700;
+  }
+  button.primary{
+    background:var(--accent);
+    color:#fff;
+    border-color:rgba(31,78,121,.35);
+  }
+  button:active{transform:translateY(1px)}
+  .small{font-size:13px}
+  .qblock{
+    padding:10px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:#fff;
+    margin-top:8px;
+  }
+  .tf{
+    display:flex; gap:16px; flex-wrap:wrap; align-items:center; margin:6px 0 10px;
+  }
+  .tf label{display:flex; align-items:center; gap:8px}
+  .divider{height:1px; background:var(--line); margin:14px 0}
+</style>
+</head>
+
+<body>
+<header>
+  <h1>TP – Visites médicales (Permis poids lourds)</h1>
+  <p>Activités : texte à trous + classement par âge + vrai/faux • <strong>Autocorrection intégrée</strong></p>
+</header>
+
+<main>
+
+  <section class="card">
+    <div class="row">
+      <div class="col">
+        <div class="notice">
+          <div class="tag">Ressource obligatoire</div>
+          <p class="muted" style="margin:8px 0 0">
+            Utilise le site officiel pour répondre (et justifier si on te le demande).
+            <br>
+            <a target="_blank" href="https://www.securite-routiere.gouv.fr/les-differents-permis-de-conduire/controle-medical-de-laptitude-la-conduite/controle-medical-pour-un-permis-professionnel">
+              Sécurité routière – Contrôle médical pour un permis professionnel
+            </a>
+          </p>
+        </div>
+        <p class="muted small" style="margin:10px 0 0">
+          ⚠️ Astuce : lis d’abord la page, puis complète. Certains items sont faciles à confondre.
+        </p>
+      </div>
+
+      <div class="col">
+        <div class="images">
+          <figure>
+            <img alt="Périodicité visites médicales poids lourds"
+                 src="https://raw.githubusercontent.com/fabriceblondot/images-permis/main/p%C3%A9riodicit%C3%A9%20poids%20lourds.webp">
+            <figcaption>Périodicité – Permis professionnels (poids lourds)</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visite médicale permis professionnel"
+                 src="https://raw.githubusercontent.com/fabriceblondot/images-permis/main/medecin.webp">
+            <figcaption>Contrôle médical – aptitude à la conduite</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ACT 1 ===================== -->
+  <section class="card" id="act1">
+    <h2>Activité 1 – Texte à trous (anti copier-coller)</h2>
+    <p class="muted">Complète le texte. <strong>Le collage est désactivé</strong> dans cette activité : tu dois écrire toi-même.</p>
+
+    <div class="qblock" id="noPasteZone">
+      <p style="line-height:1.6; margin:0">
+        Le conducteur titulaire d’un permis des catégories
+        <input type="text" id="a1_cat1" placeholder="ex : C" autocomplete="off">
+        ,
+        <input type="text" id="a1_cat2" placeholder="ex : CE" autocomplete="off">
+        ,
+        <input type="text" id="a1_cat3" placeholder="ex : D" autocomplete="off">
+        ou
+        <input type="text" id="a1_cat4" placeholder="ex : DE" autocomplete="off">
+        doit s’assurer que son permis est toujours
+        <input type="text" id="a1_valid" placeholder="..." autocomplete="off">.
+        <br><br>
+        Une
+        <input type="text" id="a1_visit1" placeholder="..." autocomplete="off">
+        <input type="text" id="a1_visit2" placeholder="..." autocomplete="off">
+        est obligatoire afin de vérifier l’aptitude à la conduite.
+        <br><br>
+        La périodicité des visites médicales est la suivante :
+      </p>
+
+      <div class="grid" style="margin-top:10px">
+        <div>
+          Tous les <input type="text" id="a1_p1_nb" placeholder="..." autocomplete="off">
+          ans jusqu’à <input type="text" id="a1_p1_age" placeholder="..." autocomplete="off"> ans
+        </div>
+        <div>
+          Tous les <input type="text" id="a1_p2_nb" placeholder="..." autocomplete="off">
+          ans de <input type="text" id="a1_p2_a" placeholder="..." autocomplete="off">
+          à <input type="text" id="a1_p2_b" placeholder="..." autocomplete="off"> ans
+        </div>
+        <div>
+          Tous les <input type="text" id="a1_p3_nb" placeholder="..." autocomplete="off">
+          à partir de <input type="text" id="a1_p3_age" placeholder="..." autocomplete="off"> ans
+        </div>
+        <div>
+          La demande de visite est effectuée par le
+          <input type="text" id="a1_who" placeholder="..." autocomplete="off">
+          auprès du service
+          <input type="text" id="a1_service" placeholder="..." autocomplete="off">
+          de la
+          <input type="text" id="a1_place" placeholder="..." autocomplete="off">
+          de son lieu de
+          <input type="text" id="a1_home" placeholder="..." autocomplete="off">.
+        </div>
+      </div>
+    </div>
+
+    <div class="btns">
+      <button class="primary" onclick="checkAct1()">Vérifier (activité 1)</button>
+      <button onclick="resetAct1()">Réinitialiser (activité 1)</button>
+    </div>
+    <div id="act1Score" class="score"></div>
+  </section>
+
+  <!-- ===================== ACT 2 ===================== -->
+  <section class="card" id="act2">
+    <h2>Activité 2 – Classement par âge</h2>
+    <p class="muted">Complète le tableau : <strong>Visite médicale ?</strong> et <strong>fréquence</strong>.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Conducteur</th>
+          <th>Âge</th>
+          <th>Permis</th>
+          <th>Visite médicale ?</th>
+          <th>Fréquence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A</td><td>42 ans</td><td>C</td>
+          <td>
+            <select id="a2_vm_A">
+              <option value="">— Choisir —</option>
+              <option value="oui">Oui</option>
+              <option value="non">Non</option>
+            </select>
+          </td>
+          <td>
+            <select id="a2_fr_A">
+              <option value="">— Choisir —</option>
+              <option value="5">Tous les 5 ans</option>
+              <option value="2">Tous les 2 ans</option>
+              <option value="1">Tous les ans</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>B</td><td>59 ans</td><td>CE</td>
+          <td>
+            <select id="a2_vm_B">
+              <option value="">— Choisir —</option>
+              <option value="oui">Oui</option>
+              <option value="non">Non</option>
+            </select>
+          </td>
+          <td>
+            <select id="a2_fr_B">
+              <option value="">— Choisir —</option>
+              <option value="5">Tous les 5 ans</option>
+              <option value="2">Tous les 2 ans</option>
+              <option value="1">Tous les ans</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>C</td><td>61 ans</td><td>D</td>
+          <td>
+            <select id="a2_vm_C">
+              <option value="">— Choisir —</option>
+              <option value="oui">Oui</option>
+              <option value="non">Non</option>
+            </select>
+          </td>
+          <td>
+            <select id="a2_fr_C">
+              <option value="">— Choisir —</option>
+              <option value="5">Tous les 5 ans</option>
+              <option value="2">Tous les 2 ans</option>
+              <option value="1">Tous les ans</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>D</td><td>75 ans</td><td>CE</td>
+          <td>
+            <select id="a2_vm_D">
+              <option value="">— Choisir —</option>
+              <option value="oui">Oui</option>
+              <option value="non">Non</option>
+            </select>
+          </td>
+          <td>
+            <select id="a2_fr_D">
+              <option value="">— Choisir —</option>
+              <option value="5">Tous les 5 ans</option>
+              <option value="2">Tous les 2 ans</option>
+              <option value="1">Tous les ans</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>E</td><td>77 ans</td><td>D</td>
+          <td>
+            <select id="a2_vm_E">
+              <option value="">— Choisir —</option>
+              <option value="oui">Oui</option>
+              <option value="non">Non</option>
+            </select>
+          </td>
+          <td>
+            <select id="a2_fr_E">
+              <option value="">— Choisir —</option>
+              <option value="5">Tous les 5 ans</option>
+              <option value="2">Tous les 2 ans</option>
+              <option value="1">Tous les ans</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="btns">
+      <button class="primary" onclick="checkAct2()">Vérifier (activité 2)</button>
+      <button onclick="resetAct2()">Réinitialiser (activité 2)</button>
+    </div>
+    <div id="act2Score" class="score"></div>
+  </section>
+
+  <!-- ===================== ACT 3 ===================== -->
+  <section class="card" id="act3">
+    <h2>Activité 3 – Vrai / Faux (avec justification)</h2>
+    <p class="muted">Coche Vrai/Faux, puis écris une justification courte.</p>
+
+    <div class="qblock" data-q="1">
+      <strong>1) La visite médicale est automatique.</strong>
+      <div class="tf">
+        <label><input type="radio" name="q1" value="V"> Vrai</label>
+        <label><input type="radio" name="q1" value="F"> Faux</label>
+      </div>
+      <textarea id="j1" placeholder="Justification (1 à 2 phrases)"></textarea>
+    </div>
+
+    <div class="qblock" data-q="2">
+      <strong>2) Le permis C est valable à vie sans contrôle médical.</strong>
+      <div class="tf">
+        <label><input type="radio" name="q2" value="V"> Vrai</label>
+        <label><input type="radio" name="q2" value="F"> Faux</label>
+      </div>
+      <textarea id="j2" placeholder="Justification (1 à 2 phrases)"></textarea>
+    </div>
+
+    <div class="qblock" data-q="3">
+      <strong>3) La fréquence de la visite médicale dépend de l’âge du conducteur.</strong>
+      <div class="tf">
+        <label><input type="radio" name="q3" value="V"> Vrai</label>
+        <label><input type="radio" name="q3" value="F"> Faux</label>
+      </div>
+      <textarea id="j3" placeholder="Justification (1 à 2 phrases)"></textarea>
+    </div>
+
+    <div class="qblock" data-q="4">
+      <strong>4) La demande de visite est faite par l’employeur.</strong>
+      <div class="tf">
+        <label><input type="radio" name="q4" value="V"> Vrai</label>
+        <label><input type="radio" name="q4" value="F"> Faux</label>
+      </div>
+      <textarea id="j4" placeholder="Justification (1 à 2 phrases)"></textarea>
+    </div>
+
+    <div class="qblock" data-q="5">
+      <strong>5) À partir de 76 ans, la visite médicale est annuelle.</strong>
+      <div class="tf">
+        <label><input type="radio" name="q5" value="V"> Vrai</label>
+        <label><input type="radio" name="q5" value="F"> Faux</label>
+      </div>
+      <textarea id="j5" placeholder="Justification (1 à 2 phrases)"></textarea>
+    </div>
+
+    <div class="btns">
+      <button class="primary" onclick="checkAct3()">Vérifier (activité 3)</button>
+      <button onclick="resetAct3()">Réinitialiser (activité 3)</button>
+    </div>
+    <div id="act3Score" class="score"></div>
+
+    <div class="divider"></div>
+    <div class="notice small">
+      <strong>Info :</strong> la justification n’est pas “corrigée” au mot près, mais une justification vide est signalée.
+    </div>
+  </section>
+
+  <!-- ===================== GLOBAL ===================== -->
+  <section class="card">
+    <h2>Bilan</h2>
+    <p class="muted">Quand tu as terminé : fais valider ton travail par le formateur.</p>
+    <div class="btns">
+      <button class="primary" onclick="checkAll()">Tout vérifier</button>
+      <button onclick="resetAll()">Tout réinitialiser</button>
+    </div>
+    <div id="allScore" class="score"></div>
+  </section>
+
+</main>
+
+<script>
+/* ===================== Anti copier-coller (Activité 1) ===================== */
+(function(){
+  const zone = document.getElementById('noPasteZone');
+
+  // Bloque clic droit dans la zone
+  zone.addEventListener('contextmenu', (e) => e.preventDefault());
+
+  // Bloque coller / drop dans la zone
+  ["paste","drop"].forEach(evt => zone.addEventListener(evt, (e) => e.preventDefault()));
+
+  // Bloque Ctrl+V / Cmd+V uniquement si on est dans un champ de la zone
+  zone.addEventListener('keydown', (e) => {
+    const isV = (e.key || "").toLowerCase() === "v";
+    const isPasteCombo = (isV && (e.ctrlKey || e.metaKey));
+    if (isPasteCombo) e.preventDefault();
+  });
+
+  // On sécurise chaque input (double protection)
+  zone.querySelectorAll('input[type="text"]').forEach(inp => {
+    inp.setAttribute("autocomplete","off");
+    inp.addEventListener('paste', e => e.preventDefault());
+    inp.addEventListener('drop', e => e.preventDefault());
+  });
+})();
+
+/* ===================== Helpers ===================== */
+function norm(s){
+  return (s ?? "")
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g,' ');
+}
+function mark(el, ok){
+  el.classList.remove('ok','bad');
+  el.classList.add(ok ? 'ok' : 'bad');
+}
+function clearMark(el){
+  el.classList.remove('ok','bad');
+}
+
+/* ===================== Activité 1 ===================== */
+const act1Answers = {
+  a1_cat1: ["c","ce","d","de"],  // on validera l'ensemble autrement
+  a1_cat2: ["c","ce","d","de"],
+  a1_cat3: ["c","ce","d","de"],
+  a1_cat4: ["c","ce","d","de"],
+  a1_valid: ["valide"],
+  a1_visit1: ["visite"],
+  a1_visit2: ["médicale","medicale"],
+  a1_p1_nb: ["5"],
+  a1_p1_age: ["60"],
+  a1_p2_nb: ["2"],
+  a1_p2_a: ["60"],
+  a1_p2_b: ["76"],
+  a1_p3_nb: ["ans","1 an","1","un an","tous les ans","tous les 1 an","tous les 1 ans"],
+  a1_p3_age: ["76"],
+  a1_who: ["conducteur"],
+  a1_service: ["médical","medical"],
+  a1_place: ["préfecture","prefecture"],
+  a1_home: ["domicile"]
+};
+
+function checkAct1(){
+  // On corrige champ par champ + un contrôle spécial sur les 4 catégories (doivent être exactement C, CE, D, DE, dans n'importe quel ordre)
+  const ids = Object.keys(act1Answers);
+  let okCount = 0;
+  let total = ids.length;
+
+  // contrôle spécial catégories
+  const cats = ["a1_cat1","a1_cat2","a1_cat3","a1_cat4"].map(id => norm(document.getElementById(id).value));
+  const required = ["c","ce","d","de"];
+  const catsOk = required.every(r => cats.includes(r)) && cats.length === 4;
+
+  ["a1_cat1","a1_cat2","a1_cat3","a1_cat4"].forEach(id => {
+    const el = document.getElementById(id);
+    mark(el, catsOk);
+  });
+  if (catsOk) okCount += 4;
+
+  // autres champs
+  ids.forEach(id => {
+    if (id.startsWith("a1_cat")) return;
+    const el = document.getElementById(id);
+    const val = norm(el.value);
+    const accepted = act1Answers[id].map(norm);
+
+    let ok = false;
+    if(id === "a1_p3_nb"){
+      // accepter "1", "1 an", "ans" etc -> si contient 1 ou "an"
+      ok = (val.includes("1") || val.includes("an") || val.includes("ans"));
+    } else {
+      ok = accepted.includes(val);
+    }
+
+    mark(el, ok);
+    if(ok) okCount++;
+  });
+
+  document.getElementById('act1Score').textContent =
+    `Activité 1 : ${okCount} / ${total} champs corrects`;
+  return {okCount, total};
+}
+
+function resetAct1(){
+  const zone = document.getElementById('noPasteZone');
+  zone.querySelectorAll('input[type="text"]').forEach(inp => {
+    inp.value = "";
+    clearMark(inp);
+  });
+  document.getElementById('act1Score').textContent = "";
+}
+
+/* ===================== Activité 2 ===================== */
+const act2Key = {
+  A: {vm:"oui", fr:"5"},
+  B: {vm:"oui", fr:"5"},
+  C: {vm:"oui", fr:"2"},
+  D: {vm:"oui", fr:"2"},
+  E: {vm:"oui", fr:"1"}
+};
+
+function checkAct2(){
+  let okCount = 0;
+  const total = Object.keys(act2Key).length * 2;
+
+  Object.keys(act2Key).forEach(k => {
+    const vm = document.getElementById(`a2_vm_${k}`);
+    const fr = document.getElementById(`a2_fr_${k}`);
+
+    const vmOk = vm.value === act2Key[k].vm;
+    const frOk = fr.value === act2Key[k].fr;
+
+    mark(vm, vmOk);
+    mark(fr, frOk);
+
+    if(vmOk) okCount++;
+    if(frOk) okCount++;
+  });
+
+  document.getElementById('act2Score').textContent =
+    `Activité 2 : ${okCount} / ${total} réponses correctes`;
+  return {okCount, total};
+}
+
+function resetAct2(){
+  Object.keys(act2Key).forEach(k => {
+    const vm = document.getElementById(`a2_vm_${k}`);
+    const fr = document.getElementById(`a2_fr_${k}`);
+    vm.value = "";
+    fr.value = "";
+    clearMark(vm);
+    clearMark(fr);
+  });
+  document.getElementById('act2Score').textContent = "";
+}
+
+/* ===================== Activité 3 ===================== */
+const act3Key = { q1:"F", q2:"F", q3:"V", q4:"F", q5:"V" };
+
+function getRadioValue(name){
+  const el = document.querySelector(`input[name="${name}"]:checked`);
+  return el ? el.value : "";
+}
+
+function checkAct3(){
+  let okCount = 0;
+  const total = Object.keys(act3Key).length * 2; // 1 point V/F + 1 point justification non vide
+
+  Object.keys(act3Key).forEach((q, idx) => {
+    const bloc = document.querySelector(`.qblock[data-q="${idx+1}"]`);
+    const val = getRadioValue(q);
+    const just = document.getElementById(`j${idx+1}`);
+
+    // score V/F
+    const tfOk = val === act3Key[q];
+    // justification non vide (on ne juge pas au mot près)
+    const justOk = norm(just.value).length >= 15; // ~ une petite phrase
+
+    mark(bloc, tfOk && justOk); // vert si les 2 sont OK, sinon rouge
+    if(tfOk) okCount++;
+    if(justOk) okCount++;
+  });
+
+  document.getElementById('act3Score').textContent =
+    `Activité 3 : ${okCount} / ${total} points (V/F + justification)`;
+  return {okCount, total};
+}
+
+function resetAct3(){
+  // radios
+  for(let i=1;i<=5;i++){
+    document.querySelectorAll(`input[name="q${i}"]`).forEach(r => r.checked = false);
+    const bloc = document.querySelector(`.qblock[data-q="${i}"]`);
+    clearMark(bloc);
+    document.getElementById(`j${i}`).value = "";
+  }
+  document.getElementById('act3Score').textContent = "";
+}
+
+/* ===================== Global ===================== */
+function checkAll(){
+  const r1 = checkAct1();
+  const r2 = checkAct2();
+  const r3 = checkAct3();
+  const okTotal = r1.okCount + r2.okCount + r3.okCount;
+  const grandTotal = r1.total + r2.total + r3.total;
+
+  document.getElementById('allScore').textContent =
+    `Total : ${okTotal} / ${grandTotal} (toutes activités)`;
+}
+
+function resetAll(){
+  resetAct1();
+  resetAct2();
+  resetAct3();
+  document.getElementById('allScore').textContent = "";
+}
+</script>
+
+</body>
+</html>

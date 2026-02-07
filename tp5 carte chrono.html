@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>TP – Carte conducteur (chronotachygraphe) – Autocorrigé</title>
+
+<style>
+  :root{
+    --bg:#f4f6f8;
+    --card:#ffffff;
+    --text:#0f172a;
+    --muted:#475569;
+    --line:rgba(2,6,23,.18);
+    --accent:#1f4e79;
+    --ok:#c8e6c9;
+    --bad:#ffcdd2;
+    --soft:#eef5ff;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    padding:18px;
+  }
+  header{
+    max-width:1200px;
+    margin:0 auto 14px auto;
+    padding:14px 16px;
+    background:linear-gradient(90deg, rgba(31,78,121,.12), rgba(31,78,121,.02));
+    border:1px solid var(--line);
+    border-radius:12px;
+  }
+  header h1{margin:0 0 6px 0;color:var(--accent)}
+  header p{margin:0;color:var(--muted)}
+  main{max-width:1200px;margin:0 auto}
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:16px;
+    margin:14px 0;
+    box-shadow:0 2px 10px rgba(2,6,23,.05);
+  }
+  .notice{
+    background:var(--soft);
+    border-left:6px solid var(--accent);
+    padding:10px 12px;
+    border-radius:10px;
+    margin:10px 0;
+  }
+  h2{margin:0 0 10px 0;color:var(--accent)}
+  .muted{color:var(--muted)}
+  a{color:var(--accent)}
+  img{
+    max-width:100%;
+    border:1px solid rgba(2,6,23,.18);
+    border-radius:12px;
+    display:block;
+    margin:10px auto 0 auto;
+  }
+  table{width:100%; border-collapse:collapse; margin-top:10px}
+  th, td{border:1px solid rgba(2,6,23,.18); padding:10px; vertical-align:top}
+  th{background:rgba(31,78,121,.06)}
+  select, input[type="text"], textarea{
+    width:100%;
+    padding:10px;
+    border-radius:10px;
+    border:1px solid rgba(2,6,23,.18);
+    outline:none;
+    background:#fff;
+    font-size:15px;
+  }
+  textarea{min-height:70px; resize:vertical}
+  button{
+    padding:10px 14px;
+    border-radius:10px;
+    border:1px solid rgba(2,6,23,.18);
+    background:#fff;
+    cursor:pointer;
+    font-weight:800;
+  }
+  button.primary{
+    background:var(--accent);
+    color:#fff;
+    border-color:rgba(31,78,121,.35);
+  }
+  .btns{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+  .ok{background:var(--ok) !important;}
+  .bad{background:var(--bad) !important;}
+  .score{font-weight:900; margin-top:10px}
+  .pill{
+    display:inline-block;
+    padding:3px 10px;
+    border-radius:999px;
+    background:rgba(2,6,23,.06);
+    color:var(--muted);
+    font-size:12px;
+    font-weight:800;
+    margin-left:8px;
+  }
+  .small{font-size:13px}
+</style>
+</head>
+
+<body>
+<header>
+  <h1>TP – Carte conducteur (chronotachygraphe numérique)</h1>
+  <p>Durée : ~1h • Travail autonome • <strong>Autocorrection intégrée</strong> • Copier/coller bloqué</p>
+</header>
+
+<main>
+
+  <!-- INTRO + ressources -->
+  <section class="card">
+    <div class="notice">
+      <strong>Ressources obligatoires (recherche autonome) :</strong><br>
+      <a href="https://www.chronoservices.fr/fr/carte-chronotachygraphe.html" target="_blank">Chronoservices – Carte chronotachygraphe</a><br>
+      <a href="https://www.chronoservices.fr/fr/carte-de-qualification-de-conducteur/remplacement.html" target="_blank">Chronoservices – Remplacement (perte/vol/détérioration)</a>
+      <div class="small muted" style="margin-top:8px">
+        ⚠️ Tu dois lire et comprendre : certaines réponses ressemblent à des “pièges” (options plausibles).
+      </div>
+    </div>
+
+    <div class="notice">
+      <strong>Objectifs :</strong>
+      <ul style="margin:8px 0 0">
+        <li>Identifier le rôle et les caractéristiques de la carte conducteur</li>
+        <li>Connaître les obligations (conducteur / employeur) et les délais</li>
+        <li>Réagir correctement dans des situations pratiques (oubli, expiration, perte, téléchargement)</li>
+      </ul>
+    </div>
+
+    <!-- Image demandée (RAW fiable) -->
+    <img
+      src="https://raw.githubusercontent.com/fabriceblondot/document-de-bord/main/exemple%20carte%20chrono.jpg"
+      alt="Exemple de carte conducteur (chronotachygraphe)">
+    <p class="muted small" style="text-align:center;margin:8px 0 0">
+      Exemple de carte conducteur (illustration)
+    </p>
+  </section>
+
+  <!-- ACTIVITÉ 1 -->
+  <section class="card" id="act1">
+    <h2>Activité 1 – QCM (compréhension) <span class="pill">≈ 20 min</span></h2>
+    <p class="muted"><strong>Consigne :</strong> Réponds au QCM à partir des ressources Chronoservices. (≥ 5 choix à chaque question)</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Choix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1) La carte conducteur est…</td>
+          <td>
+            <select id="a1q1">
+              <option value="">— Choisir —</option>
+              <option value="a">une carte à puce nominative (personnelle)</option>
+              <option value="b">une carte papier plastifiée</option>
+              <option value="c">une carte valable pour n’importe quel conducteur</option>
+              <option value="d">un document d’assurance du véhicule</option>
+              <option value="e">une attestation de formation (FIMO/FCO)</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>2) La durée de validité habituelle de la carte conducteur est…</td>
+          <td>
+            <select id="a1q2">
+              <option value="">— Choisir —</option>
+              <option value="a">2 ans</option>
+              <option value="b">3 ans</option>
+              <option value="c">5 ans</option>
+              <option value="d">10 ans</option>
+              <option value="e">illimitée</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>3) La carte conducteur enregistre principalement…</td>
+          <td>
+            <select id="a1q3">
+              <option value="">— Choisir —</option>
+              <option value="a">uniquement la vitesse</option>
+              <option value="b">les temps de conduite / repos / autres activités</option>
+              <option value="c">uniquement le carburant consommé</option>
+              <option value="d">les contraventions du conducteur</option>
+              <option value="e">les trajets GPS détaillés en temps réel</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>4) Pour être en règle, le conducteur doit insérer sa carte…</td>
+          <td>
+            <select id="a1q4">
+              <option value="">— Choisir —</option>
+              <option value="a">uniquement si le trajet dépasse 50 km</option>
+              <option value="b">avant de prendre la route (début d’activité)</option>
+              <option value="c">seulement à l’arrivée sur site</option>
+              <option value="d">uniquement en cas de contrôle</option>
+              <option value="e">quand l’employeur le demande par écrit</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>5) En cas de perte / vol / détérioration, l’action correcte est de…</td>
+          <td>
+            <select id="a1q5">
+              <option value="">— Choisir —</option>
+              <option value="a">continuer à rouler sans rien faire</option>
+              <option value="b">emprunter la carte d’un collègue</option>
+              <option value="c">demander un remplacement via la procédure Chronoservices</option>
+              <option value="d">attendre la visite médicale</option>
+              <option value="e">faire une nouvelle carte grise</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>6) Prêter sa carte à un collègue, c’est…</td>
+          <td>
+            <select id="a1q6">
+              <option value="">— Choisir —</option>
+              <option value="a">autorisé si le collègue est du même dépôt</option>
+              <option value="b">autorisé si c’est moins d’une journée</option>
+              <option value="c">interdit (carte nominative et personnelle)</option>
+              <option value="d">autorisé uniquement sur autoroute</option>
+              <option value="e">possible si l’employeur valide</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="btns">
+      <button class="primary" onclick="checkAct1()">Vérifier (activité 1)</button>
+      <button onclick="resetAct1()">Réinitialiser (activité 1)</button>
+    </div>
+    <div id="s1" class="score"></div>
+  </section>
+
+  <!-- ACTIVITÉ 2 -->
+  <section class="card" id="act2">
+    <h2>Activité 2 – Obligations / Acteur / Délai <span class="pill">≈ 20 min</span></h2>
+    <p class="muted">
+      <strong>Consigne :</strong> Pour chaque mini-situation, choisis :
+      <strong>qui</strong> est concerné (conducteur / employeur) et le <strong>bon délai</strong> / la bonne règle.
+      <br><span class="small">Objectif : ne pas refaire le QCM, mais appliquer les règles.</span>
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Mini-situation</th>
+          <th>Qui ?</th>
+          <th>Règle / délai correct</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1) Avant de partir en tournée, on doit s’assurer que la carte est insérée.</td>
+          <td>
+            <select id="a2_who1">
+              <option value="">—</option>
+              <option value="conducteur">Conducteur</option>
+              <option value="employeur">Employeur</option>
+              <option value="les2">Les deux</option>
+              <option value="client">Client</option>
+              <option value="atelier">Atelier</option>
+            </select>
+          </td>
+          <td>
+            <select id="a2_rule1">
+              <option value="">—</option>
+              <option value="avant">Avant de prendre la route</option>
+              <option value="apres">Après avoir livré</option>
+              <option value="controle">Uniquement en cas de contrôle</option>
+              <option value="mensuel">Une fois par mois</option>
+              <option value="jamais">Ce n’est pas obligatoire</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>2) Téléchargement des données de la carte conducteur (règle standard).</td>
+          <td>
+            <select id="a2_who2">
+              <option value="">—</option>
+              <option value="conducteur">Conducteur</option>
+              <option value="employeur">Employeur</option>
+              <option value="les2">Les deux</option>
+              <option value="client">Client</option>
+              <option value="atelier">Atelier</option>
+            </select>
+          </td>
+          <td>
+            <select id="a2_rule2">
+              <option value="">—</option>
+              <option value="7">Tous les 7 jours</option>
+              <option value="14">Tous les 14 jours</option>
+              <option value="28">Tous les 28 jours</option>
+              <option value="90">Tous les 90 jours</option>
+              <option value="jamais">Aucune obligation</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>3) Conservation des données (obligation minimale).</td>
+          <td>
+            <select id="a2_who3">
+              <option value="">—</option>
+              <option value="conducteur">Conducteur</option>
+              <option value="employeur">Employeur</option>
+              <option value="les2">Les deux</option>
+              <option value="client">Client</option>
+              <option value="atelier">Atelier</option>
+            </select>
+          </td>
+          <td>
+            <select id="a2_rule3">
+              <option value="">—</option>
+              <option value="3">3 mois</option>
+              <option value="6">6 mois</option>
+              <option value="12">12 mois minimum</option>
+              <option value="24">24 mois</option>
+              <option value="0">Aucune conservation</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>4) Carte arrivée à expiration : ce qu’il fallait faire.</td>
+          <td>
+            <select id="a2_who4">
+              <option value="">—</option>
+              <option value="conducteur">Conducteur</option>
+              <option value="employeur">Employeur</option>
+              <option value="les2">Les deux</option>
+              <option value="client">Client</option>
+              <option value="atelier">Atelier</option>
+            </select>
+          </td>
+          <td>
+            <select id="a2_rule4">
+              <option value="">—</option>
+              <option value="anticiper">Anticiper le renouvellement avant expiration</option>
+              <option value="prete">Prendre la carte d’un collègue</option>
+              <option value="rouler">Rouler sans carte sans justificatif</option>
+              <option value="attendre">Attendre plusieurs mois</option>
+              <option value="aucun">Rien : c’est automatique</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>5) Perte / vol / détérioration : démarche correcte.</td>
+          <td>
+            <select id="a2_who5">
+              <option value="">—</option>
+              <option value="conducteur">Conducteur</option>
+              <option value="employeur">Employeur</option>
+              <option value="les2">Les deux</option>
+              <option value="client">Client</option>
+              <option value="atelier">Atelier</option>
+            </select>
+          </td>
+          <td>
+            <select id="a2_rule5">
+              <option value="">—</option>
+              <option value="remplacement">Demander un remplacement (Chronoservices)</option>
+              <option value="prete">Emprunter une autre carte</option>
+              <option value="rien">Ne rien faire</option>
+              <option value="permis">Refaire le permis</option>
+              <option value="carte_grise">Refaire la carte grise</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="btns">
+      <button class="primary" onclick="checkAct2()">Vérifier (activité 2)</button>
+      <button onclick="resetAct2()">Réinitialiser (activité 2)</button>
+    </div>
+    <div id="s2" class="score"></div>
+  </section>
+
+  <!-- ACTIVITÉ 3 -->
+  <section class="card" id="act3">
+    <h2>Activité 3 – Cas concrets pratiques (autocorrigés) <span class="pill">≈ 15 min</span></h2>
+    <p class="muted">
+      <strong>Consigne :</strong> Pour chaque cas, choisis la conduite à tenir la plus correcte.
+      <br><span class="small">Ici on vise la réaction “terrain” : quoi faire, tout de suite, correctement.</span>
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Cas</th>
+          <th>Situation</th>
+          <th>Peut-il rouler ?</th>
+          <th>Action correcte</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Le conducteur est sur le point de partir et se rend compte qu’il a oublié sa carte conducteur.</td>
+          <td>
+            <select id="c1_can">
+              <option value="">—</option>
+              <option value="oui">Oui, sans condition</option>
+              <option value="non">Non (en principe, il faut la carte)</option>
+              <option value="oui2">Oui, si on dépasse 3,5 t</option>
+              <option value="oui3">Oui, si c’est moins de 50 km</option>
+              <option value="oui4">Oui, si l’employeur le demande</option>
+            </select>
+          </td>
+          <td>
+            <select id="c1_do">
+              <option value="">—</option>
+              <option value="retour">Retourner récupérer la carte avant de partir</option>
+              <option value="prete">Emprunter la carte d’un collègue</option>
+              <option value="rouler">Partir et régulariser à la fin</option>
+              <option value="aucun">Ne rien faire</option>
+              <option value="photo">Envoyer une photo par SMS</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td>La carte du conducteur est expirée depuis quelques jours.</td>
+          <td>
+            <select id="c2_can">
+              <option value="">—</option>
+              <option value="oui">Oui, sans condition</option>
+              <option value="non">Non (carte non valide)</option>
+              <option value="oui2">Oui si le trajet est local</option>
+              <option value="oui3">Oui si l’employeur autorise</option>
+              <option value="oui4">Oui avec une photocopie</option>
+            </select>
+          </td>
+          <td>
+            <select id="c2_do">
+              <option value="">—</option>
+              <option value="renouvel">Faire/avoir anticipé le renouvellement (démarche Chronoservices)</option>
+              <option value="prete">Prendre la carte d’un collègue</option>
+              <option value="attendre">Attendre la prochaine tournée</option>
+              <option value="carte_grise">Refaire la carte grise</option>
+              <option value="rien">Ne rien faire</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>3</td>
+          <td>Les données de la carte n’ont pas été téléchargées depuis plus d’un mois.</td>
+          <td>
+            <select id="c3_can">
+              <option value="">—</option>
+              <option value="oui">Oui, c’est toujours possible</option>
+              <option value="non">Non, jamais</option>
+              <option value="oui2">Oui mais la règle de téléchargement n’est pas respectée</option>
+              <option value="oui3">Oui seulement la nuit</option>
+              <option value="oui4">Oui si on est en messagerie</option>
+            </select>
+          </td>
+          <td>
+            <select id="c3_do">
+              <option value="">—</option>
+              <option value="telech">Procéder au téléchargement (rattraper) et respecter les 28 jours</option>
+              <option value="suppr">Supprimer les données</option>
+              <option value="ignore">Ignorer : ce n’est pas important</option>
+              <option value="prete">Prêter sa carte pour copier les données</option>
+              <option value="changer">Changer de carte conducteur</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>4</td>
+          <td>Le conducteur a perdu sa carte (ou elle est volée/détériorée).</td>
+          <td>
+            <select id="c4_can">
+              <option value="">—</option>
+              <option value="oui">Oui, sans condition</option>
+              <option value="non">Non (en principe, carte nécessaire)</option>
+              <option value="oui2">Oui si on a le permis C/CE</option>
+              <option value="oui3">Oui si le client est d’accord</option>
+              <option value="oui4">Oui si on a une photo</option>
+            </select>
+          </td>
+          <td>
+            <select id="c4_do">
+              <option value="">—</option>
+              <option value="rempl">Faire une demande de remplacement (Chronoservices)</option>
+              <option value="prete">Emprunter une carte</option>
+              <option value="rien">Attendre</option>
+              <option value="repasser">Repasser le code</option>
+              <option value="assurance">Contacter l’assurance véhicule</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="btns">
+      <button class="primary" onclick="checkAct3()">Vérifier (activité 3)</button>
+      <button onclick="resetAct3()">Réinitialiser (activité 3)</button>
+    </div>
+    <div id="s3" class="score"></div>
+  </section>
+
+  <!-- ACTIVITÉ 4 -->
+  <section class="card" id="act4">
+    <h2>Activité 4 – Vrai / Faux <span class="pill">≈ 10 min</span></h2>
+    <p class="muted"><strong>Consigne :</strong> Choisis Vrai/Faux, puis écris une justification courte (facultatif, mais conseillé).</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Affirmation</th>
+          <th>V/F</th>
+          <th>Justification (conseillée)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1) La carte conducteur est nominative et ne doit pas être prêtée.</td>
+          <td>
+            <select id="v1">
+              <option value="">—</option>
+              <option value="V">Vrai</option>
+              <option value="F">Faux</option>
+            </select>
+          </td>
+          <td><textarea id="j1" placeholder="1 à 2 phrases"></textarea></td>
+        </tr>
+
+        <tr>
+          <td>2) Le téléchargement des données de la carte doit se faire régulièrement (règle standard).</td>
+          <td>
+            <select id="v2">
+              <option value="">—</option>
+              <option value="V">Vrai</option>
+              <option value="F">Faux</option>
+            </select>
+          </td>
+          <td><textarea id="j2" placeholder="1 à 2 phrases"></textarea></td>
+        </tr>
+
+        <tr>
+          <td>3) L’employeur doit conserver les données pendant une durée minimale.</td>
+          <td>
+            <select id="v3">
+              <option value="">—</option>
+              <option value="V">Vrai</option>
+              <option value="F">Faux</option>
+            </select>
+          </td>
+          <td><textarea id="j3" placeholder="1 à 2 phrases"></textarea></td>
+        </tr>
+
+        <tr>
+          <td>4) Si la carte est perdue/volée/détériorée, il faut engager une procédure de remplacement.</td>
+          <td>
+            <select id="v4">
+              <option value="">—</option>
+              <option value="V">Vrai</option>
+              <option value="F">Faux</option>
+            </select>
+          </td>
+          <td><textarea id="j4" placeholder="1 à 2 phrases"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="btns">
+      <button class="primary" onclick="checkAct4()">Vérifier (activité 4)</button>
+      <button onclick="resetAct4()">Réinitialiser (activité 4)</button>
+    </div>
+    <div id="s4" class="score"></div>
+
+    <div class="notice small">
+      ⚠️ La justification n’est pas corrigée au mot près, mais écrire aide beaucoup pour mémoriser.
+    </div>
+  </section>
+
+  <!-- BILAN -->
+  <section class="card">
+    <h2>Bilan <span class="pill">≈ 5 min</span></h2>
+    <p class="muted">
+      En quelques lignes : explique pourquoi la carte conducteur est indispensable et ce que tu fais pour éviter une infraction.
+    </p>
+    <textarea placeholder="Réponse personnelle"></textarea>
+
+    <div class="btns">
+      <button class="primary" onclick="checkAll()">Tout vérifier</button>
+      <button onclick="resetAll()">Tout réinitialiser</button>
+    </div>
+    <div id="sAll" class="score"></div>
+  </section>
+
+</main>
+
+<script>
+/* ===================== Blocage copier/coller global (toutes activités) ===================== */
+(function(){
+  // Bloque menu contextuel (clic droit)
+  document.addEventListener('contextmenu', e => e.preventDefault());
+
+  // Bloque copier / couper / coller + drag/drop
+  ["copy","cut","paste","drop"].forEach(evt => {
+    document.addEventListener(evt, e => e.preventDefault());
+  });
+
+  // Bloque Ctrl+C / Ctrl+X / Ctrl+V et équivalents Mac
+  document.addEventListener('keydown', (e) => {
+    const k = (e.key || "").toLowerCase();
+    const combo = (e.ctrlKey || e.metaKey) && (k === "c" || k === "x" || k === "v");
+    if(combo) e.preventDefault();
+  });
+})();
+
+/* ===================== Helpers ===================== */
+function mark(el, ok){
+  el.classList.remove('ok','bad');
+  el.classList.add(ok ? 'ok' : 'bad');
+}
+function clearMark(el){
+  el.classList.remove('ok','bad');
+}
+
+/* ===================== Activité 1 ===================== */
+const act1Key = {
+  a1q1:"a",
+  a1q2:"c",
+  a1q3:"b",
+  a1q4:"b",
+  a1q5:"c",
+  a1q6:"c"
+};
+function checkAct1(){
+  let ok=0, total=Object.keys(act1Key).length;
+  for(const id in act1Key){
+    const el = document.getElementById(id);
+    const isOk = el.value === act1Key[id];
+    mark(el, isOk);
+    if(isOk) ok++;
+  }
+  document.getElementById("s1").textContent = `Score activité 1 : ${ok} / ${total}`;
+  return {ok,total};
+}
+function resetAct1(){
+  for(const id in act1Key){
+    const el = document.getElementById(id);
+    el.value = "";
+    clearMark(el);
+  }
+  document.getElementById("s1").textContent = "";
+}
+
+/* ===================== Activité 2 ===================== */
+const act2Key = {
+  a2_who1:"conducteur", a2_rule1:"avant",
+  a2_who2:"employeur",  a2_rule2:"28",
+  a2_who3:"employeur",  a2_rule3:"12",
+  a2_who4:"conducteur", a2_rule4:"anticiper",
+  a2_who5:"conducteur", a2_rule5:"remplacement"
+};
+function checkAct2(){
+  let ok=0, total=Object.keys(act2Key).length;
+  for(const id in act2Key){
+    const el = document.getElementById(id);
+    const isOk = el.value === act2Key[id];
+    mark(el, isOk);
+    if(isOk) ok++;
+  }
+  document.getElementById("s2").textContent = `Score activité 2 : ${ok} / ${total}`;
+  return {ok,total};
+}
+function resetAct2(){
+  for(const id in act2Key){
+    const el = document.getElementById(id);
+    el.value = "";
+    clearMark(el);
+  }
+  document.getElementById("s2").textContent = "";
+}
+
+/* ===================== Activité 3 ===================== */
+const act3Key = {
+  c1_can:"non", c1_do:"retour",
+  c2_can:"non", c2_do:"renouvel",
+  c3_can:"oui2", c3_do:"telech",
+  c4_can:"non", c4_do:"rempl"
+};
+function checkAct3(){
+  let ok=0, total=Object.keys(act3Key).length;
+  for(const id in act3Key){
+    const el = document.getElementById(id);
+    const isOk = el.value === act3Key[id];
+    mark(el, isOk);
+    if(isOk) ok++;
+  }
+  document.getElementById("s3").textContent = `Score activité 3 : ${ok} / ${total}`;
+  return {ok,total};
+}
+function resetAct3(){
+  for(const id in act3Key){
+    const el = document.getElementById(id);
+    el.value = "";
+    clearMark(el);
+  }
+  document.getElementById("s3").textContent = "";
+}
+
+/* ===================== Activité 4 ===================== */
+const act4Key = { v1:"V", v2:"V", v3:"V", v4:"V" };
+function checkAct4(){
+  let ok=0, total=Object.keys(act4Key).length;
+  for(const id in act4Key){
+    const el = document.getElementById(id);
+    const isOk = el.value === act4Key[id];
+    mark(el, isOk);
+    if(isOk) ok++;
+  }
+  document.getElementById("s4").textContent = `Score activité 4 : ${ok} / ${total}`;
+  return {ok,total};
+}
+function resetAct4(){
+  for(const id in act4Key){
+    const el = document.getElementById(id);
+    el.value = "";
+    clearMark(el);
+  }
+  // on vide aussi les justifications (pas notées)
+  ["j1","j2","j3","j4"].forEach(id => document.getElementById(id).value = "");
+  document.getElementById("s4").textContent = "";
+}
+
+/* ===================== Global ===================== */
+function checkAll(){
+  const r1=checkAct1();
+  const r2=checkAct2();
+  const r3=checkAct3();
+  const r4=checkAct4();
+  const okTotal = r1.ok+r2.ok+r3.ok+r4.ok;
+  const total = r1.total+r2.total+r3.total+r4.total;
+  document.getElementById("sAll").textContent = `Total : ${okTotal} / ${total}`;
+}
+function resetAll(){
+  resetAct1(); resetAct2(); resetAct3(); resetAct4();
+  document.getElementById("sAll").textContent = "";
+}
+</script>
+
+</body>
+</html>
